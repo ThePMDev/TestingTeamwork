@@ -5,7 +5,13 @@ A test repository for team members to practice cloning, pulling, branching, push
 
 Notes from `feature-test-branch`
 
-
 ### Second Commit
 
 Second commit
+
+# This is the code from the feature-two branch
+
+This does some stuff to illustrate merge conflicts.
+
+
+### Second commit on feature-two branch
