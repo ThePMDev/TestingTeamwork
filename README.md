@@ -15,3 +15,7 @@ This does some stuff to illustrate merge conflicts.
 
 
 ### Second commit on feature-two branch
+
+### This is code from the feature three branch
+
+This is some new documentation.
