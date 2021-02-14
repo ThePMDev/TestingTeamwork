@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="google-signin-client_id" content="410432958342-1n97r18pk6vd9pa6ma22nu3je6jfmse8.apps.googleusercontent.com">
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+        <title>Git GH Team Test</title>
+    </head>
+    <body>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="faq.html">FAQ</a>
+            <a href="login.html">Login</a>
+        </nav>
+        <h1>Google Signin Authorization Demo</h1>
+
+        <h3>Note, to run this code you'll need to have your server running, 
+            either localhost on a PC or use terminal to run the following 
+            in the folder where you store these files:
+            
+            python -m SimpleHTTPServer 9000
+        </h3>
+        <h4>For example my url is: http://localhost:9000/login.html</h4>
+
+        <p>Click sign in to see examples of the user's profile data used on screen</p>
+        <div id="photo"></div>
+        <div id="name"></div>
+        <div id="email"></div>
+
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+
+        <button onclick="signOut()">Sign out</button>
+
+        <script>
+            function onSignIn(googleUser) {
+                // get user profile information
+                console.log("Calling the 'profile'");
+                console.log("Profile");
+
+                console.log("using googleUser.getBasicProfile()");
+                console.log(googleUser.getBasicProfile())
+        
+                // get user profile as an ID Token, or JWT Token
+                console.log("Using googleUser.getAuthResponse().id_token");
+                console.log(googleUser.getAuthResponse().id_token);
+            
+                // pulling out individual data from the getBasicProfile
+                var profile = googleUser.getBasicProfile();
+                console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+                console.log('Name: ' + profile.getName());
+                console.log('Image URL: ' + profile.getImageUrl());
+                console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+            
+                // below is the code to get the user information to show up on the page
+                var image = document.createElement('img');
+                image.setAttribute('src', googleUser.getBasicProfile().getImageUrl());
+
+                document.querySelector("#photo").append(image);
+                document.querySelector("#name").innerText = googleUser.getBasicProfile().getName();
+                document.querySelector("#email").innerText = googleUser.getBasicProfile().getEmail();
+            }
+
+            function signOut() {
+                var auth2 = gapi.auth2.getAuthInstance();
+                auth2.signOut().then(function () {
+                console.log('User signed out.');
+
+                // remove content elements
+                document.querySelector("#photo").remove();
+                document.querySelector("#name").remove();
+                document.querySelector("#email").remove();
+                });
+            }
+        </script>
+        <p>Resources I used for this:</p>
+        <p>https://www.intricatecloud.io/2019/07/adding-google-sign-in-to-your-webapp-pt-1/</p>
+        <p>https://developers.google.com/identity/sign-in/web/sign-in</p>
+        <p>https://www.journaldev.com/15915/python-simplehttpserver-http-server</p>
+        <p>https://www.intricatecloud.io/2019/07/adding-google-sign-in-to-your-webapp-using-the-js-library/</p>
+    </body>
+</html>
